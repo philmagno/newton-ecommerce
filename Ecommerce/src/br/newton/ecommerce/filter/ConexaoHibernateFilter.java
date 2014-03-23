@@ -1,16 +1,18 @@
 package br.newton.ecommerce.filter;
 
 import javax.servlet.Filter;
+
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 
 import org.hibernate.SessionFactory;
 
 import br.newton.ecommerce.util.HibernateUtil;
-
+@WebFilter
 public class ConexaoHibernateFilter implements Filter {
 
 	private SessionFactory	sf;

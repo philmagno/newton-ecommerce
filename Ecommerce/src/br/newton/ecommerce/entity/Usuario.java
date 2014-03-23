@@ -26,9 +26,9 @@ public class Usuario implements Serializable {
 
 	@Id
 	@GeneratedValue
-	@Column(name  = "codigo")
+	@Column(name  = "idusuario")
 	private Integer codigo;
-	
+	private String login;
 	private String nome;
 	private String telefone;
 	private String cep;
@@ -196,4 +196,12 @@ public class Usuario implements Serializable {
 		return true;
 	}
 
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+	
 }
