@@ -4,13 +4,15 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import br.newton.ecommerce.business.ProdutoBusiness;
 import br.newton.ecommerce.entity.Produto;
+import br.newton.ecommerce.mocks.PayPalServicesProducao;
 
 /**
  * ManagedBean responsável pela tela com a lista de produtos do site.
@@ -18,7 +20,7 @@ import br.newton.ecommerce.entity.Produto;
  * @author philippe
  * 
  */
-@ManagedBean
+@Named("produtoBean")
 @RequestScoped
 public class ProdutoBean implements Serializable {
 
@@ -34,6 +36,9 @@ public class ProdutoBean implements Serializable {
 	int index = 0;
 	int limit = 12;
 	private String filtroProduto;
+	
+	@Inject
+	private PayPalServicesProducao payPalProducao; 
 
 	public ProdutoBean() {
 		produtoBusiness = new ProdutoBusiness();

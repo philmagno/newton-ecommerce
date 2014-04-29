@@ -41,9 +41,10 @@
 				<div class="row">
 					<div class="links pull-right">
 						<a href="index.jsf">Home</a> |
-						<!-- 						<a href="registro.jsf">Minha Conta</a> | -->
 						<a href="registro.jsf">Cadastro</a> |
-						<!-- 						<a href="carrinho.jsf">Carrinho de Compras</a> | -->
+						<a href="carrinho.jsf">Meu carrinho</a> |
+						<a href="carrinho.jsf">Finalizar Compra</a> |
+						<!-- 						<a href="registro.jsf">Minha Conta</a> | -->
 						<!-- 						<a href="two-column.html">Sobre</a> | -->
 						<!-- 						<a href="contact.html">Contato</a> | -->
 						<!-- 						<a href="#" onclick="document.location='#{request.contextPath}/j_spring_security_logout'">Sair</a> -->
@@ -67,32 +68,24 @@
 							<div class="nav-collapse">
 								<ul class="nav">
 									<li>
-										<!-- 							  <a href="category.html">Computadores</a>		 --> 
-										<h:link value="Computador" outcome="listaProduto">
+										<!-- 							  <a href="category.html">Computadores</a>		 --> <h:link
+											value="Computador" outcome="listaProduto">
 											<f:param name="categoria" value="1" />
 										</h:link>
 									</li>
 
-									<li>
-										<h:link value="Notebook" outcome="listaProduto">
+									<li><h:link value="Notebook" outcome="listaProduto">
 											<f:param name="categoria" value="2" />
-										</h:link>
-									</li>
-									<li>
-										<h:link value="Acessório" outcome="listaProduto">
+										</h:link></li>
+									<li><h:link value="Acessório" outcome="listaProduto">
 											<f:param name="categoria" value="3" />
-										</h:link>
-									</li>
-									<li>
-										<h:link value="Tablet" outcome="listaProduto">
+										</h:link></li>
+									<li><h:link value="Tablet" outcome="listaProduto">
 											<f:param name="categoria" value="4" />
-										</h:link>
-									</li>
-									<li>
-										<h:link value="Celulares" outcome="listaProduto" >
+										</h:link></li>
+									<li><h:link value="Celulares" outcome="listaProduto">
 											<f:param name="categoria" value="5" />
-										</h:link>
-									</li>
+										</h:link></li>
 								</ul>
 								<ul class="nav pull-right">
 									<li class="divider-vertical"></li>
@@ -115,15 +108,14 @@
 			</div>
 		</div>
 		<!-- end nav -->
-	</div>
 
-	<div class="container">
-		<div id="corpo">
+
+
+		<div id="row">
 			<ui:insert name="corpo" />
 		</div>
-	</div>
 
-	<div class="container">
+
 		<footer>
 		<hr />
 		<div class="row well no_margin_left">
@@ -140,8 +132,6 @@
 			</div>
 		</div>
 		</footer>
-
 	</div>
-
 </body>
 </html>

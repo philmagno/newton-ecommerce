@@ -6,42 +6,43 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="produto")
 public class Produto implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
 	@Column(name="idproduto")
 	private int id;
 	
-	@Column(name="nome_produto")
+	@Column(name="nome")
 	private String nome;
 	
 	@Column(name="idcategoria")
-	private int categoria;
+	private transient int categoria;
 	
 	@Column(name="preco")
-	private String preco;
+	private double preco;
 	
-	@Column(name="caminhoimagem")
+	@Column(name="caminhoImagem")
 	private String imagem;
 	
-	public int getId() {
-		return id;
-	}
+	private transient int quantidade;
 
-	public void setId(int id) {
-		this.id = id;
+	/**
+	 * Método responsável por informar o valor total do produto.
+	 * @return
+	 */
+	public double getValorTotal(){
+		return preco * quantidade;
 	}
-
+	
+	/*
+	 * Defaults Getters and Setters 
+	 */
 	public String getNome() {
 		return nome;
 	}
@@ -58,11 +59,11 @@ public class Produto implements Serializable{
 		this.categoria = categoria;
 	}
 
-	public String getPreco() {
+	public double getPreco() {
 		return preco;
 	}
 
-	public void setPreco(String preco) {
+	public void setPreco(double preco) {
 		this.preco = preco;
 	}
 
@@ -74,10 +75,38 @@ public class Produto implements Serializable{
 		this.imagem = imagem;
 	}
 
-	@Override
-	public String toString() {
-		return "Produto [id=" + id + ", nome=" + nome + ", categoria="
-				+ categoria + ", preco=" + preco + "]";
+	public int getQuantidade() {
+		return quantidade;
 	}
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Produto other = (Produto) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}	
 
 }

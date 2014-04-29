@@ -1,9 +1,9 @@
 package br.newton.ecommerce.bean;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 
-@ManagedBean(name = "produtosBean")
+@Named("produtosBean")
 @RequestScoped
 public class ProdutosBean {
 	String nome = "testes";

@@ -2,18 +2,18 @@ package br.newton.ecommerce.bean;
 
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
 
 import org.springframework.util.DigestUtils;
 
 import br.newton.ecommerce.business.UsuarioBusiness;
 import br.newton.ecommerce.entity.Usuario;
 
-@ManagedBean(name="usuarioBean")
+@Named("usuarioBean")
 @RequestScoped
 public class UsuarioBean {
 

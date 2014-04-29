@@ -1,30 +1,32 @@
 package br.newton.ecommerce.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
-import org.hibernate.Query;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import br.newton.ecommerce.entity.Produto;
+import br.newton.ecommerce.util.JPAUtil;
 
-public class ProdutoDAO extends AbstractDAO {
+public class ProdutoDAO implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	private EntityManager entityManager;
 
 	public ProdutoDAO() {
-		super();
+		this.entityManager = JPAUtil.getEntityManager();
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Produto> findPaginated(int index, int max) {
-		if(getSession() == null ||
-				getSession() != null && !getSession().isOpen()){
-			this.setSession(DAOFactory.criarConexao());
-		}
-		
-		Query query = getSession()
-				.createSQLQuery(
-						"select * from produto order by idproduto limit :index , :max")
-				.addEntity(Produto.class).setParameter("index", index)
+
+		Query query = this.entityManager
+				.createNativeQuery(
+						"select * from produto order by idproduto limit :index , :max",
+						Produto.class).setParameter("index", index)
 				.setParameter("max", max);
-		List<Produto> produtos = query.list();
+		List<Produto> produtos = query.getResultList();
 		for (Produto p : produtos) {
 			System.out.println(p.getId());
 		}
@@ -32,43 +34,34 @@ public class ProdutoDAO extends AbstractDAO {
 		return produtos;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Produto> findAll() {
-		if(getSession() == null ||
-				getSession() != null && !getSession().isOpen()){
-			this.setSession(DAOFactory.criarConexao());
-		}
-		
-		Query query = getSession().createSQLQuery("select * from produto")
-				.addEntity(Produto.class);
-		List<Produto> produtos = query.list();
+
+		Query query = this.entityManager.createNativeQuery(
+				"select * from produto", Produto.class);
+		List<Produto> produtos = query.getResultList();
 
 		return produtos;
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	public List<Produto> filteredFind(String filtro) {
-		if(getSession() == null ||
-				getSession() != null && !getSession().isOpen()){
-			this.setSession(DAOFactory.criarConexao());
-		}
-		
-		Query query = getSession().createSQLQuery("select * from produto where nome_produto like :nome limit 12")
-				.addEntity(Produto.class).setParameter("nome", filtro+"%");
-		
-		List<Produto> produtos = query.list();
+		Query query = this.entityManager.createNativeQuery(
+				"select * from produto where nome_produto like :nome limit 12",
+				Produto.class).setParameter("nome", filtro + "%");
+
+		List<Produto> produtos = query.getResultList();
 
 		return produtos;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Produto> filtroCategoria(String categoria) {
-		if(getSession() == null ||
-				getSession() != null && !getSession().isOpen()){
-			this.setSession(DAOFactory.criarConexao());
-		}
-		
-		Query query = getSession().createSQLQuery("select * from produto where categoria = :categoria")
-				.addEntity(Produto.class).setParameter("categoria", categoria);
-		
-		List<Produto> produtos = query.list();
+		Query query = this.entityManager.createNativeQuery(
+				"select * from produto where categoria = :categoria",
+				Produto.class).setParameter("categoria", categoria);
+
+		List<Produto> produtos = query.getResultList();
 
 		return produtos;
 	}
